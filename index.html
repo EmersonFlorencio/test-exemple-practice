@@ -1,0 +1,159 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f6f7f4">
+  <meta name="description" content="Uma simulação educativa de transferências com dinheiro fictício.">
+  <title>Entre — simulador de transferências</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar" aria-label="Navegação principal">
+      <a class="brand" href="#inicio" aria-label="Entre, início">
+        <span class="brand-mark" aria-hidden="true"><span></span><span></span></span>
+        <span>entre<span class="brand-dot">.</span></span>
+      </a>
+
+      <div class="sidebar-label">MENU PRINCIPAL</div>
+      <nav class="main-nav">
+        <a class="nav-link" href="#inicio"><span class="nav-icon icon-grid" aria-hidden="true"></span>Visão geral</a>
+        <a class="nav-link active" href="#transferir" aria-current="page"><span class="nav-icon icon-arrows" aria-hidden="true"></span>Transferir</a>
+        <a class="nav-link" href="#atividade"><span class="nav-icon icon-clock" aria-hidden="true"></span>Atividade</a>
+        <a class="nav-link" href="#contatos"><span class="nav-icon icon-users" aria-hidden="true"></span>Contatos</a>
+      </nav>
+
+      <div class="sidebar-bottom">
+        <div class="help-card">
+          <div class="help-icon" aria-hidden="true">✳</div>
+          <strong>Um espaço para aprender.</strong>
+          <p>Experimente à vontade. Aqui, o dinheiro é de mentirinha.</p>
+        </div>
+        <button class="profile-button" type="button" aria-label="Perfil de Marina Costa">
+          <span class="avatar avatar-you">MC</span>
+          <span class="profile-copy"><strong>Marina Costa</strong><small>Conta de demonstração</small></span>
+          <span class="more-dots" aria-hidden="true">•••</span>
+        </button>
+      </div>
+    </aside>
+
+    <main class="main-content" id="inicio">
+      <header class="topbar">
+        <div class="mobile-brand brand"><span class="brand-mark" aria-hidden="true"><span></span><span></span></span><span>entre<span class="brand-dot">.</span></span></div>
+        <div class="breadcrumb"><span>Início</span><span class="crumb-divider">/</span><strong>Transferir</strong></div>
+        <div class="topbar-actions">
+          <span class="demo-pill"><span></span> MODO DEMONSTRAÇÃO</span>
+          <button id="reset-button" class="reset-button" type="button" title="Reiniciar a simulação"><span aria-hidden="true">↻</span><span class="reset-label">Reiniciar</span></button>
+        </div>
+      </header>
+
+      <section class="page-intro" aria-labelledby="page-title">
+        <div>
+          <p class="eyebrow">QUARTA-FEIRA, 12 DE JUNHO DE 2024</p>
+          <h1 id="page-title">Dinheiro bom é aquele que <span>circula.</span></h1>
+          <p class="intro-copy">Faça uma transferência de mentirinha. Sem pressa, sem risco — só aprendizado.</p>
+        </div>
+        <div class="intro-decoration" aria-hidden="true"><span class="deco-sun">✳</span><span class="deco-orbit"></span><span class="deco-dot"></span></div>
+      </section>
+
+      <div class="content-grid">
+        <div class="left-column">
+          <section class="balance-card" aria-labelledby="balance-title">
+            <div class="balance-topline"><span id="balance-title">SALDO DISPONÍVEL</span><span class="balance-status"><span></span> Tudo certo</span></div>
+            <div class="balance-amount" id="balance-amount">R$ 2.450<span>,00</span></div>
+            <div class="balance-footer"><span>Na sua carteira de demonstração</span><span class="balance-sparkle" aria-hidden="true">✳</span></div>
+            <div class="balance-orb orb-one" aria-hidden="true"></div><div class="balance-orb orb-two" aria-hidden="true"></div>
+          </section>
+
+          <section class="panel transfer-panel" id="transferir" aria-labelledby="transfer-title">
+            <div class="panel-heading">
+              <div><div class="step-label"><span>01</span> NOVA TRANSFERÊNCIA</div><h2 id="transfer-title">Para quem vai?</h2></div>
+              <span class="heading-icon" aria-hidden="true">↗</span>
+            </div>
+
+            <form id="transfer-form" novalidate>
+              <div class="field-group">
+                <label for="recipient">Escolha uma pessoa</label>
+                <div class="select-wrap">
+                  <span class="field-leading-icon" aria-hidden="true">◎</span>
+                  <select id="recipient" name="recipient" aria-describedby="recipient-error">
+                    <option value="">Selecione um contato</option>
+                    <option value="ana">Ana Oliveira</option>
+                    <option value="lucas">Lucas Mendes</option>
+                    <option value="bia">Beatriz Santos</option>
+                    <option value="rafa">Rafael Lima</option>
+                  </select>
+                  <span class="select-chevron" aria-hidden="true">⌄</span>
+                </div>
+                <p class="field-error" id="recipient-error" aria-live="polite"></p>
+              </div>
+
+              <div class="field-group">
+                <div class="label-row"><label for="amount">Quanto você quer enviar?</label><span class="available-label">Disponível: <strong id="available-amount">R$ 2.450,00</strong></span></div>
+                <div class="amount-input-wrap">
+                  <span class="currency-prefix">R$</span>
+                  <input id="amount" name="amount" type="number" min="0.01" step="0.01" inputmode="decimal" placeholder="0,00" aria-describedby="amount-hint amount-error">
+                </div>
+                <div class="amount-meta"><span id="amount-hint">Mínimo de R$ 0,01</span><span class="field-error" id="amount-error" aria-live="polite"></span></div>
+              </div>
+
+              <div class="field-group description-group">
+                <label for="description">Quer deixar um recado? <span class="optional">OPCIONAL</span></label>
+                <div class="description-wrap"><span class="field-leading-icon note-icon" aria-hidden="true">✎</span><input id="description" name="description" type="text" maxlength="80" placeholder="Ex.: valeu pelo café!" aria-describedby="description-count"><span class="char-count" id="description-count">0/80</span></div>
+              </div>
+
+              <div class="transfer-note"><span aria-hidden="true">✳</span><p>Esta é uma simulação. Nenhum dinheiro de verdade será movimentado.</p></div>
+              <button class="submit-button" type="submit"><span>Revisar transferência</span><span aria-hidden="true">→</span></button>
+            </form>
+          </section>
+        </div>
+
+        <div class="right-column">
+          <section class="panel contacts-panel" id="contatos" aria-labelledby="contacts-title">
+            <div class="section-heading"><div><p class="eyebrow">GENTE DE VERDADE (QUASE)</p><h2 id="contacts-title">Seus contatos</h2></div><button class="text-button" type="button" id="show-all-contacts">Ver todos <span aria-hidden="true">→</span></button></div>
+            <div class="contact-list">
+              <button class="contact-item" type="button" data-recipient="ana"><span class="avatar avatar-ana">AO</span><span class="contact-copy"><strong>Ana Oliveira</strong><small>Amiga de longa data</small></span><span class="quick-send" aria-label="Escolher Ana">+</span></button>
+              <button class="contact-item" type="button" data-recipient="lucas"><span class="avatar avatar-lucas">LM</span><span class="contact-copy"><strong>Lucas Mendes</strong><small>Seu parceiro de café</small></span><span class="quick-send" aria-label="Escolher Lucas">+</span></button>
+              <button class="contact-item" type="button" data-recipient="bia"><span class="avatar avatar-bia">BS</span><span class="contact-copy"><strong>Beatriz Santos</strong><small>Da turma de sábado</small></span><span class="quick-send" aria-label="Escolher Beatriz">+</span></button>
+              <button class="contact-item" type="button" data-recipient="rafa"><span class="avatar avatar-rafa">RL</span><span class="contact-copy"><strong>Rafael Lima</strong><small>Vizinho gente boa</small></span><span class="quick-send" aria-label="Escolher Rafael">+</span></button>
+            </div>
+            <button class="add-contact" type="button" id="add-contact"><span>+</span> Adicionar contato</button>
+          </section>
+
+          <section class="panel activity-panel" id="atividade" aria-labelledby="activity-title">
+            <div class="section-heading activity-heading"><div><p class="eyebrow">SEU DINHEIRO EM MOVIMENTO</p><h2 id="activity-title">Últimas atividades</h2></div><span class="activity-count" id="activity-count">3</span></div>
+            <div class="activity-list" id="activity-list" aria-live="polite">
+              <article class="activity-item"><span class="activity-icon received" aria-hidden="true">↓</span><div class="activity-copy"><strong>Pix recebido</strong><small>Hoje, 09:42 · Ana Oliveira</small></div><span class="activity-value positive">+ R$ 180,00</span></article>
+              <article class="activity-item"><span class="activity-icon sent" aria-hidden="true">↑</span><div class="activity-copy"><strong>Café da manhã</strong><small>Ontem, 08:15 · Lucas Mendes</small></div><span class="activity-value">− R$ 24,50</span></article>
+              <article class="activity-item"><span class="activity-icon received" aria-hidden="true">↓</span><div class="activity-copy"><strong>Divisão do jantar</strong><small>10 jun, 20:31 · Beatriz Santos</small></div><span class="activity-value positive">+ R$ 65,00</span></article>
+            </div>
+            <p class="activity-footnote"><span aria-hidden="true">✳</span> Tudo aqui é fictício, inclusive o café.</p>
+          </section>
+
+          <div class="quote-card"><span class="quote-mark" aria-hidden="true">“</span><p>Compartilhar também é uma forma de cuidar.</p><span class="quote-credit">— filosofia da carteira</span><span class="quote-flower" aria-hidden="true">✳</span></div>
+        </div>
+      </div>
+      <footer class="page-footer"><span>Feito para aprender, não para pagar.</span><span>ENTRE © 2024 <i>·</i> SIMULAÇÃO EDUCATIVA</span></footer>
+    </main>
+  </div>
+
+  <div class="modal-backdrop" id="confirmation-modal" hidden>
+    <section class="confirmation-dialog" role="dialog" aria-modal="true" aria-labelledby="confirmation-title" aria-describedby="confirmation-copy">
+      <button class="modal-close" type="button" id="close-modal" aria-label="Fechar">×</button>
+      <div class="success-mark" aria-hidden="true"><span>✓</span></div>
+      <p class="eyebrow">TRANSFERÊNCIA SIMULADA</p>
+      <h2 id="confirmation-title">Tudo certo por aqui!</h2>
+      <p id="confirmation-copy" class="confirmation-copy">Sua transferência fictícia foi concluída.</p>
+      <div class="receipt"><div><span>Para</span><strong id="receipt-recipient"></strong></div><div><span>Valor</span><strong id="receipt-amount"></strong></div><div id="receipt-description-row" hidden><span>Recado</span><strong id="receipt-description"></strong></div><div><span>Quando</span><strong id="receipt-date"></strong></div><div><span>Identificador</span><strong id="receipt-id"></strong></div></div>
+      <button class="submit-button modal-done" type="button" id="done-button"><span>Continuar praticando</span><span aria-hidden="true">→</span></button>
+      <p class="modal-disclaimer">Nenhum dinheiro real foi movimentado.</p>
+    </section>
+  </div>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+</body>
+</html>
