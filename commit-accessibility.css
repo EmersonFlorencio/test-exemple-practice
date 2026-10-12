@@ -1,0 +1,5 @@
+/* Small accessibility improvement for keyboard navigation. */
+.nav-link:focus-visible {
+  outline: 3px solid #a7c19e;
+  outline-offset: 2px;
+}
